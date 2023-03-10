@@ -34,7 +34,7 @@ const createAnswerValidator =
 
 ];
 
-const updateAnswersValidator = 
+const updateAnswersValidator =  
 [
 
     check("content", "error en el campo content")

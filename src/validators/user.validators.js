@@ -1,4 +1,4 @@
-const { check } = require("express-validator");
+const { check, param } = require("express-validator");
 const validateResult = require("../utils/validate");
 
 const createUserValidator = [
@@ -40,6 +40,13 @@ const createUserValidator = [
 
 const updateUserValidator = 
 [
+   param("id", "error en el campo id de la url")
+  .exists()
+  .withMessage("El username debe existir")
+  .isIn()
+  .withMessage("el valor debe ser un numero entero"),
+
+
     check("username", "Error con el campo username")
     .exists()
     .withMessage("El username debe existir")

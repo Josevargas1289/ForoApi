@@ -1,13 +1,13 @@
 const AnswerServices = require("../services/answer.services");
 
-const createAnswer = async (req, res) => {
+const createAnswer = async (req, res, next) => {
   try {
     // obtener la información de la respuesta
     const newAnswer = req.body;
     const answer = await AnswerServices.create(newAnswer);
     res.status(201).json(answer);
   } catch (error) {
-    res.status(400).json(error);
+    next(error)
   }
 };
 const deleteAnswers = async (req, res)=>{
@@ -17,7 +17,7 @@ const deleteAnswers = async (req, res)=>{
     res.status(204).send();
     
   } catch (error) {
-    res.status(400).json(error)
+    next(error)
   }
 }
 
@@ -28,7 +28,7 @@ const updateAnswers = async (req, res)=>{
     await AnswerServices.update(data, id)
     res.status(204).send();
   } catch (error) {
-    res.status(400).json(error)
+    next(error)
   }
 }
 

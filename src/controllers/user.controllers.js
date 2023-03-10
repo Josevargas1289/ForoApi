@@ -3,7 +3,7 @@ const UserServices = require("../services/UserServices");
 
 
 
-const createUser =  async (req, res)=>{
+const createUser =  async (req, res, next)=>{
     try {
         const newUser = req.body;
         // validar el username
@@ -17,7 +17,7 @@ const createUser =  async (req, res)=>{
         const user = await UserServices.create(newUser);
         res.json(user)
     } catch (error) {
-        res.status(400).json(error);
+        next(error)
         
     }
 
@@ -30,7 +30,7 @@ const putUserId = async (req, res)=>{
         const userUpdate = await UserServices.putUser(id, data)
         res.json(userUpdate)
     } catch (error) {
-        res.status(400).json(error)
+        next(error)
         
     }
 }
@@ -40,7 +40,7 @@ const getAllUsers = async (req, res)=>{
         const data = await UserServices.getAll()
         res.json(data)
     } catch (error) {
-        res.status(400).json(error)
+        next(error)
     }
 }
 

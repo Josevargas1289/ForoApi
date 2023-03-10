@@ -7,6 +7,7 @@ const db = new Sequelize({
   username: "postgres",
   password: "1289",
   dialect: "postgres",
+  logging: false, // ayuda a quitar todo los loggien de la consola 
 });
 
 module.exports = db;

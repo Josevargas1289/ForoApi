@@ -1,12 +1,12 @@
 const PostsServices = require("../services/postsServices");
 
 
-const getAllPosts = async (req, res) =>{
+const getAllPosts = async (req, res, next) =>{
     try {
         const data = await PostsServices.getALl()
         res.json(data)
     } catch (error) {
-        res.status(400).json(error)
+        next(error)
     }
 
 }
@@ -18,7 +18,7 @@ const createPosts = async (req, res)=>{
         res.status(201).json(posts)
 
     } catch (error) {
-        res.status(400).json(error)
+        next(error)
     }
  }
 
@@ -28,7 +28,7 @@ const createPosts = async (req, res)=>{
       const postWithAnswers = await PostsServices.postWithAnswers(postId);
       res.json(postWithAnswers);
     } catch (error) {
-      res.status(400).json(error);
+        next(error)
     }
   };
 
@@ -39,7 +39,7 @@ const createPosts = async (req, res)=>{
         await PostsServices.update(data, id) 
         res.status(204).send();
     } catch (error) {
-        res.status(400).json(error)
+        next(error)
     }
   }
 
